@@ -3,9 +3,11 @@ import './styles.scss';
 
 export function Header() {
   return (
-    <header>
+    <header className='header'>
       <div className="container">
-        <img src={Logo} alt="Logo do site The Movie Database" />
+        <div className="logo">
+          <img src={Logo} alt="Logo do site The Movie Database" />
+        </div>
       </div>
     </header>
   )

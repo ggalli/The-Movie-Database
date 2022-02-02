@@ -1,6 +1,18 @@
-header {
-  display: flex;
-  align-items: center;
+.header {
+  
   background-color: var(--color-primary);
-  height: 56px;
+
+  .logo {
+    height: 56px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    .logo {
+      justify-content: center;
+    }
+  } 
 }

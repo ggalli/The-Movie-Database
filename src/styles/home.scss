@@ -1,0 +1,84 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-secondary);
+  padding: 84px 0;
+  text-align: center;
+
+  h1 {
+    font-size: 48px;
+    line-height: 56px;
+    color: #FFF;
+    max-width: 800px;
+    margin: 0 auto 40px;
+  } 
+
+  &__filters {
+
+    span {
+      font-weight: 700;
+      color: #FFF;
+      text-transform: uppercase;
+    }
+
+    &-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      gap: 12px;
+    }
+  }
+}
+
+main {
+  padding-top: 29px;
+
+  .movies-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 175px);
+    justify-items: center;
+    justify-content: center;
+    gap: 32px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 40px 0;
+    text-align: left;
+
+    &__filters {
+
+      &-wrapper {
+        justify-content: flex-start;
+        gap: 12px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .hero {
+    h1 {
+      font-size: 24px;
+      line-height: 28px;
+    }
+
+    &__filters {
+      &-wrapper {
+        margin-top: 8px;
+      }
+    }
+  }
+
+  main {
+    .movies-wrapper {
+      grid-template-columns: repeat(auto-fit, 156px);
+      gap: 16px;
+    }
+  }
+}

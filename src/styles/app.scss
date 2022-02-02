@@ -2,6 +2,8 @@
   --color-primary: #5C16C5;
   --color-secondary: #2D0C5E;
   --color-contrast: #D18000;
+  --color-neutral-700: #323232;
+  --color-neutral-500: #646464;
 }
 
 * {
@@ -17,5 +19,13 @@ h1, h2, h3 {
 }
 
 .container  {
-  padding: 0 112px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media screen and (max-width: 375px) {
+  .container {
+    padding: 0 16px;
+  }
 }

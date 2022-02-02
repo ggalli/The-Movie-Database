@@ -1,0 +1,27 @@
+.movie-card {
+  width: 175px;
+
+  &__image {
+    width: 100%;
+    margin-bottom: 8px;
+  } 
+
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+  } 
+
+  &__subtitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-neutral-500);
+    line-height: 24px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .movie-card {
+    width: 156px;
+  }
+}

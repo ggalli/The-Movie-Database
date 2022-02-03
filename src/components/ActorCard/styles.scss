@@ -1,0 +1,23 @@
+.actor-card { 
+  width: 190px;
+  padding: 8px;
+  border-radius: 4px;
+  background: #FFF;
+  box-shadow: 0px 4px 4px 0px #00000040;
+
+  &__photo {
+    max-width: 175px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  &__name {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 30px;
+    color: var(--color-neutral-900);
+  }
+  &__character {
+    font-size: 16px;
+    color: var(--color-neutral-900);
+  }
+}

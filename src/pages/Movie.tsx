@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CircularProgressbar } from 'react-circular-progressbar';
 
 import { ActorCard } from '../components/ActorCard';
@@ -65,7 +65,11 @@ export function Movie() {
   const [cast, setCast] = useState<CastProps[]>();
   const [videoKey, setVideoKey] = useState('');
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
     async function getMovie() {
       let response = await api.get(`/movie/${movieId}`, {
         params: {
@@ -90,7 +94,7 @@ export function Movie() {
     }
     getMovieVideos()
     getMovie();
-  }, []);
+  }, [movieId]);
 
   const release_year = movie?.release_date.split('-')[0];
   const currentDate = new Date();
@@ -175,7 +179,13 @@ export function Movie() {
           <h3>Recomendações</h3>
           <div className="recommendations-wrapper">
             {recommendations?.map(movie => (
-              <MovieCard key={movie.id} title={movie.title} release_date={movie.release_date} poster_path={movie.poster_path}/>
+              <MovieCard 
+                key={movie.id} 
+                title={movie.title} 
+                release_date={movie.release_date} 
+                poster_path={movie.poster_path}
+                onClick={() => navigate(`/movies/${movie.id}`)}
+              />
             ))}
           </div>
         </div>

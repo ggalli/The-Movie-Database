@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { MovieCard } from "../components/MovieCard";
 import "../styles/home.scss";
@@ -23,6 +23,8 @@ export function Home() {
   const [genres, setGenres] = useState<GenreProps[]>([]);
   const [movies, setMovies] = useState<MovieProps[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const navigate = useNavigate();
 
   const filter = searchParams.get('filter');
 
@@ -106,6 +108,7 @@ export function Home() {
                 title={movie.title}
                 release_date={movie.release_date}
                 poster_path={movie.poster_path}
+                onClick={() => navigate(`movies/${movie.id}`)}
               />
             ))}
           </div>

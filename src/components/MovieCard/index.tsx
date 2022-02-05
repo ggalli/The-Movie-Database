@@ -1,18 +1,22 @@
+import { MouseEventHandler } from "react";
 import './styles.scss';
 
 type MovieProps = {
   title: string;
   release_date: string;
   poster_path: string;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 export function MovieCard({
   title,
   release_date,
-  poster_path
+  poster_path,
+  onClick,
+  ...props
 }: MovieProps) {
   return (
-    <div className="movie-card">
+    <div className="movie-card" onClick={onClick}>
       <figure>
         <img className='movie-card__image' src={`https://image.tmdb.org/t/p/w200${poster_path}`} alt={`Poster do filme ${title}`}/>
 

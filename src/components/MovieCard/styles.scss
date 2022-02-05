@@ -1,5 +1,12 @@
 .movie-card {
   width: 175px;
+  padding: 4px;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid #ccc;
+    transform: scale(1.05);
+  }
 
   &__image {
     width: 100%;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Button } from "../components/Button";
 import { MovieCard } from "../components/MovieCard";
 import "../styles/home.scss";
@@ -22,9 +22,9 @@ type MovieProps = {
 export function Home() {
   const [genres, setGenres] = useState<GenreProps[]>([]);
   const [movies, setMovies] = useState<MovieProps[]>([]);
-  // const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  // const filterParam = searchParams.get('filter');
+  const filter = searchParams.get('filter');
 
   useEffect(() => {
     async function getGenres() {
@@ -46,11 +46,30 @@ export function Home() {
     getMovies();
   }, []);
 
-  // function filterMovies(id: number) {
-  //   let filtered = movies.filter(movie => movie.genre_ids.includes(id));
-  //   setFilteredMovies(filtered);
-  //   setSearchParams({ filter: id.toString() });
-  // }
+  useEffect(() => {
+
+    async function getFilteredMovies() {
+      let response = await api.get("/discover/movie", {
+        params: { with_genres: filter }
+      });
+
+      if (response.status === 200) {
+        setMovies(response.data.results);
+      }
+    }
+    getFilteredMovies();
+
+  }, [searchParams]);
+
+  function filterMovies(genreId: number) {
+    const genre = genreId.toString();
+
+    if (filter == genre) {
+      setSearchParams({})
+    } else {
+      setSearchParams({ filter: genreId.toString() })
+    }
+  }
 
   return (
     <div className="home">
@@ -58,13 +77,19 @@ export function Home() {
         <div className="container">
           <div className="hero-wrapper">
             <h1>Milhões de filmes, séries e pessoas para descobrir. Explore já.</h1>
-            
+
             <div className="hero__filters">
               <span>Filtre por:</span>
 
               <div className="hero__filters-wrapper">
                 {genres.map((genre) => (
-                  <Button key={genre.id}>{genre.name}</Button>
+                  <Button
+                    key={genre.id}
+                    active={filter == genre.id.toString()}
+                    onClick={() => filterMovies(genre.id)}
+                  >
+                    {genre.name}
+                  </Button>
                 ))}
               </div>
             </div>

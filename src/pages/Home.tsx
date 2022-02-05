@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 // import { useSearchParams } from "react-router-dom";
-import { Button } from '../components/Button';
-import { MovieCard } from '../components/MovieCard';
-import '../styles/home.scss';
+import { Button } from "../components/Button";
+import { MovieCard } from "../components/MovieCard";
+import "../styles/home.scss";
 
-import { api } from '../services/api';
+import { api } from "../services/api";
 
 type GenreProps = {
   id: number;
   name: string;
-}
+};
 
 type MovieProps = {
   id: number;
@@ -17,7 +17,7 @@ type MovieProps = {
   title: string;
   release_date: string;
   poster_path: string;
-}
+};
 
 export function Home() {
   const [genres, setGenres] = useState<GenreProps[]>([]);
@@ -28,24 +28,23 @@ export function Home() {
 
   useEffect(() => {
     async function getGenres() {
-      let response = await api.get('/genre/movie/list');
+      let response = await api.get("/genre/movie/list");
       if (response.status === 200) {
-        setGenres(response.data.genres);     
+        setGenres(response.data.genres);
       }
     }
     getGenres();
-  }, [])
+  }, []);
 
   useEffect(() => {
     async function getMovies() {
-      let response = await api.get('/movie/popular');
+      let response = await api.get("/movie/popular");
       if (response.status === 200) {
-        setMovies(response.data.results);     
+        setMovies(response.data.results);
       }
     }
     getMovies();
-
-  }, [])
+  }, []);
 
   // function filterMovies(id: number) {
   //   let filtered = movies.filter(movie => movie.genre_ids.includes(id));
@@ -53,40 +52,40 @@ export function Home() {
   //   setSearchParams({ filter: id.toString() });
   // }
 
-
   return (
-    <>
-    <div className="hero">
-      <div className="container"> 
-        <h1>Milhões de filmes, séries e pessoas para descobrir. Explore já.</h1>
-        <div className="hero__filters">
-          <span>Filtre por:</span>
+    <div className="home">
+      <div className="hero">
+        <div className="container">
+          <div className="hero-wrapper">
+            <h1>Milhões de filmes, séries e pessoas para descobrir. Explore já.</h1>
+            
+            <div className="hero__filters">
+              <span>Filtre por:</span>
 
-          <div className="hero__filters-wrapper">
-            {genres.map((genre) => (
-              <Button key={genre.id}>
-                {genre.name}
-              </Button>
-            ))}
+              <div className="hero__filters-wrapper">
+                {genres.map((genre) => (
+                  <Button key={genre.id}>{genre.name}</Button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <main>
-      <div className="container"> 
-        <div className="movies-wrapper">
-          {movies.map((movie) => (
-            <MovieCard 
-              key={movie.id}
-              title={movie.title} 
-              release_date={movie.release_date} 
-              poster_path={movie.poster_path} 
-            />
-          ))}
+      <main>
+        <div className="container">
+          <div className="movies-wrapper">
+            {movies.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                title={movie.title}
+                release_date={movie.release_date}
+                poster_path={movie.poster_path}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    </main>
-    </>
-  )
+      </main>
+    </div>
+  );
 }

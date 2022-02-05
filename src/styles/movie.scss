@@ -1,0 +1,183 @@
+.movie {
+  .hero {
+    background: var(--color-secondary);
+    padding-top: 22px;
+  }
+
+  &-wrapper {
+    display: flex;
+    gap: 32px;
+    color: #fff;
+  }
+
+  &__image {
+    width: 100%;
+    max-width: 380px;
+    max-height: 570px;
+    position: relative;
+    top: 50px;
+  }
+
+  &__info {
+    padding-top: 50px;
+  }
+
+  &__title {
+    font-size: 32px;
+    line-height: 38px;
+    margin-bottom: 8px;
+  }
+
+  &__subtitle {
+    font-size: 18px;
+  }
+
+  &__description {
+    margin-bottom: 16px;
+  }
+
+  &__rating {
+    margin: 32px 0;
+
+    .CircularProgressbar {
+      width: 60px;
+      height: 60px;
+      margin-right: 12px;
+      background: #ffffff1a;
+      border-radius: 50%;
+      &-path {
+        stroke: #14ff00;
+        stroke-width: 12;
+        stroke-linecap: round;
+      }
+      &-trail {
+        stroke-width: 0;
+      }
+      &-text {
+        fill: #14ff00;
+        font-size: 26px;
+      }
+    }
+  }
+
+  h5 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  h3 {
+    font-size: 28px;
+    line-height: 32px;
+    color: var(--color-neutral-900);
+    margin-bottom: 32px;
+  }
+
+  &__overview {
+    color: var(--color-neutral-300);
+    margin-bottom: 24px;
+    line-height: 24px;
+  }
+
+  &__crew-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+
+    .crew {
+      &__name {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+      }
+      &__job {
+        font-size: 14px;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .cast {
+    margin-top: 74px;
+    overflow: hidden;
+
+    &__group {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 0 4px 26px;
+    }
+  }
+
+  .trailer {
+    margin-top: 40px;
+    &__placeholder {
+      max-width: 900px;
+      img {
+        width: 100%;
+      }
+    }
+
+    &__video {
+    }
+  }
+
+  .recommendations {
+    margin: 64px 0;
+
+    &-wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 175px);
+      justify-items: center;
+      gap: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .movie {
+    &-wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__image {
+      position: initial;
+      margin-top: 12px;
+    }
+
+    &__info {
+      padding-top: 10px;
+    }
+
+    .cast,
+    .trailer,
+    .recommendations {
+      margin-top: 46px;
+    }
+
+    .recommendations-wrapper {
+      grid-template-columns: repeat(auto-fit, 156px);
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .movie {
+    &__image {
+      max-width: 185px;
+    }
+
+    &__subtitle {
+      span {
+        display: block;
+      }
+      .dot {
+        display: none;
+      }
+    }
+
+    .recommendations-wrapper {
+      gap: 16px;
+    }
+  }
+}

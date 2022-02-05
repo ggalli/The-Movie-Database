@@ -2,8 +2,10 @@
   --color-primary: #5C16C5;
   --color-secondary: #2D0C5E;
   --color-contrast: #D18000;
-  --color-neutral-700: #323232;
+  --color-neutral-300: #DDD;
   --color-neutral-500: #646464;
+  --color-neutral-700: #323232;
+  --color-neutral-900: ##131313;
 }
 
 * {
@@ -13,7 +15,11 @@
   font-family: 'Roboto', sans-serif;
 }
 
-h1, h2, h3 {
+body {
+  background: #E5E5E5;
+}
+
+h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   margin: 0;
 }

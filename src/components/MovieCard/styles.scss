@@ -2,10 +2,10 @@
   width: 175px;
   padding: 4px;
   cursor: pointer;
+  transition: transform 0.15s ease-in-out;
 
   &:hover {
-    border: 1px solid #ccc;
-    transform: scale(1.05);
+    transform: scale(1.04);
   }
 
   &__image {

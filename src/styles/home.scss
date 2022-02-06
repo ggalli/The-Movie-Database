@@ -36,6 +36,46 @@
       }
     }
   }
+
+}
+.pagination {
+  margin: 70px 0;
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__button {
+    list-style: none;
+    
+    &--link {
+      font-weight: 700;
+      color: var(--color-primary);
+      padding: 8px 16px;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--color-neutral-300);
+      }
+    }
+  }
+}
+
+.pagination__button.disabled {
+  .pagination__button--link {
+    color: var(--color-neutral-500);
+    cursor: initial;
+    &:hover {
+      background: none;
+    }
+  }
+}
+
+.pagination__button.selected {
+  .pagination__button--link {
+    background: var(--color-neutral-300);
+  }
 }
 
 main {

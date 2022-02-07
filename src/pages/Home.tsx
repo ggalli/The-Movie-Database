@@ -52,7 +52,9 @@ export function Home() {
       if (response.status === 200) {
         const { results, total_pages } = response.data;
         setMovies(results);
-        if (total_pages < totalPages) {
+        if (total_pages > 500) {
+          setTotalPages(500);
+        } else {
           setTotalPages(total_pages);
         }
       }
@@ -66,7 +68,9 @@ export function Home() {
       if (response.status === 200) {
         const { results, total_pages } = response.data;
         setMovies(results);
-        if (total_pages < totalPages) {
+        if (total_pages > 500) {
+          setTotalPages(500);
+        } else {
           setTotalPages(total_pages);
         }
       }
@@ -82,17 +86,38 @@ export function Home() {
     getMovies();
     return;
 
-  }, [filter, page, totalPages]);
+  }, [filter, page]);
 
-  function filterMovies(genreId: number) {
-    const genre = genreId.toString();
+  function filterMovies(id: number) {
+
+    const getNewFilters = (filters: string[], item: string): string => {
+
+      if (filters.includes(item)) {
+        let index = filters.indexOf(item);
+        filters.splice(index, 1);
+      } else {
+        filters.push(item);
+      }
+
+      return filters.join(',');;
+    }
 
     const newParams = createSearchParams(searchParams);
+    const genreId = id.toString();
 
-    if (filter === genre) {
-      newParams.delete('filter')
+    let newFilter:string = '';
+
+    if (filter) {
+      let filters = filter.split(',');
+      newFilter = getNewFilters(filters, genreId);
     } else {
-      newParams.set('filter', genre)
+      newFilter = genreId;
+    }
+
+    if (newFilter) {
+      newParams.set('filter', newFilter);
+    } else {
+      newParams.delete('filter')
     }
     
     newParams.delete('page')
@@ -122,7 +147,7 @@ export function Home() {
                 {genres.map((genre) => (
                   <Button
                     key={genre.id}
-                    active={filter === genre.id.toString()}
+                    active={filter?.includes(genre.id.toString())}
                     onClick={() => filterMovies(genre.id)}
                   >
                     {genre.name}

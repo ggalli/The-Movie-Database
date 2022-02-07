@@ -34,6 +34,13 @@ type RecommendationProps = {
   popularity: number;
 }
 
+type VideoProps = {
+  id: string;
+  key: string;
+  name: string;
+  official: boolean;
+}
+
 type MovieProps = {
   id: number;
   title: string;
@@ -55,6 +62,13 @@ type MovieProps = {
   recommendations: {
     results: Array<RecommendationProps>
   }
+  videos: {
+    results: Array<VideoProps>
+  }
+}
+
+function getOfficialTrailer(trailers:Array<VideoProps>) {
+  return trailers.filter(trailer => trailer.name === 'Official Trailer')[0];
 }
 
 export function Movie() {
@@ -63,7 +77,7 @@ export function Movie() {
   const [recommendations, setRecommendations] = useState<RecommendationProps[]>();
   const [crew, setCrew] = useState<CrewProps[]>();
   const [cast, setCast] = useState<CastProps[]>();
-  const [videoKey, setVideoKey] = useState('');
+  const [video, setVideo] = useState<VideoProps>();
 
   const navigate = useNavigate();
 
@@ -77,23 +91,28 @@ export function Movie() {
         }
       });
       if (response.status === 200) {
+        const { recommendations, credits } = response.data;
         setMovie(response.data); 
-        setRecommendations(getMainByPopularity(response.data.recommendations.results, 6)); 
-        setCrew(getMainByPopularity(response.data.credits.crew, 5)); 
-        setCast(getMainByPopularity(response.data.credits.cast, 20)); 
+        setRecommendations(getMainByPopularity(recommendations.results, 6)); 
+        setCrew(getMainByPopularity(credits.crew, 5));
+        setCast(getMainByPopularity(credits.cast, 20));
       }
     }
 
-    async function getMovieVideos() {
+    async function getVideos() {
       let response = await api.get(`/movie/${movieId}/videos`, {
-        params: {language: null}
+        params: {
+          language: null
+        }
       });
       if (response.status === 200) {
-        setVideoKey(response.data.results[0].key);
+        setVideo(getOfficialTrailer(response.data.results));
       }
     }
-    getMovieVideos()
+
     getMovie();
+    getVideos();
+
   }, [movieId]);
 
   const release_year = movie?.release_date.split('-')[0];
@@ -167,11 +186,8 @@ export function Movie() {
 
         <div className="trailer">
           <h3>Trailer</h3>
-          <div className="trailer__placeholder">
-            <img src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`} alt={`Trailer do filme ${movie?.title}`} />
-          </div>
           <div className="trailer__video">
-
+            <iframe width="900" height="500" src={`https://www.youtube.com/embed/${video?.key}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
           </div>
         </div>
 

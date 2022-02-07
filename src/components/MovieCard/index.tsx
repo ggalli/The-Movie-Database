@@ -1,4 +1,6 @@
 import { MouseEventHandler } from "react";
+
+import placeholder from '../../assets/images/movie-placeholder.jpg';
 import './styles.scss';
 
 type MovieProps = {
@@ -18,7 +20,7 @@ export function MovieCard({
   return (
     <div className="movie-card" onClick={onClick}>
       <figure>
-        <img className='movie-card__image' src={`https://image.tmdb.org/t/p/w200${poster_path}`} alt={`Poster do filme ${title}`}/>
+        <img className='movie-card__image' src={poster_path ? `https://image.tmdb.org/t/p/w200${poster_path}` : placeholder} alt={`Poster do filme ${title}`}/>
 
         <figcaption>
           <div className="movie-card__title">

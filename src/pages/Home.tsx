@@ -185,7 +185,7 @@ export function Home() {
           <div className="pagination">
             <ReactPaginate
               pageCount={totalPages}
-              pageRangeDisplayed={5}
+              pageRangeDisplayed={4}
               marginPagesDisplayed={1}
               onPageChange={handlePageClick}
               forcePage={page === 0 ? 0 : page - 1} //check page because ReactPaginate works with index value and page param not

@@ -141,6 +141,14 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .movie {
+    .recommendations {
+      margin-top: 14px;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .movie {
     &-wrapper {

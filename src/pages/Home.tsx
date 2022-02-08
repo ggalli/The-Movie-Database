@@ -34,9 +34,18 @@ export function Home() {
 
   useEffect(() => {
     async function getGenres() {
+      const genresStored = localStorage.getItem('genres');
+      
+      if (genresStored) {
+        return setGenres(JSON.parse(genresStored));
+      }
+
       let response = await api.get("/genre/movie/list");
+
       if (response.status === 200) {
-        setGenres(response.data.genres);
+        const genres = response.data.genres;
+        setGenres(genres);
+        localStorage.setItem('genres', JSON.stringify(genres));
       }
     }
 
